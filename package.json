@@ -6,24 +6,24 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "github": "https://github.com/Sryther/Node-StrawberryCupcake",
     "keywords": [
         "chat",
         "nodejs"
     ],
-    "authors": [
+    "author": "Paul Rey <paul.rey@sryther.fr>",
+    "contributors": [
         {
             "name": "Thomas Soter",
-            "email":  "<thomas.soter@y-nov.com>"
+            "email":  "thomas.soter@y-nov.com"
         },
         {
             "name": "Joffrey Dupire",
-            "email":  "<joffrey.dupire@y-nov.com>"
-        },
-        {
-            "name": "Paul Rey",
-            "email":  "<paul.rey@sryther.fr>"
+            "email":  "joffrey.dupire@y-nov.com"
         }
     ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Sryther/Node-StrawberryCupcake.git"
+    },
     "license": "MIT"
 }
