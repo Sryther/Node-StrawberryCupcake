@@ -1,0 +1,11 @@
+{
+    "name": "server",
+    "main": "server.js",
+    "plugin": {
+        "consumes": [
+        ],
+        "provides": [
+            "server"
+        ]
+    }
+}
