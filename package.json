@@ -1,0 +1,29 @@
+{
+    "name": "StrawberryCupcake",
+    "version": "0.0.1",
+    "description": "A new way to interact with your visitors",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "github": "https://github.com/Sryther/Node-StrawberryCupcake",
+    "keywords": [
+        "chat",
+        "nodejs"
+    ],
+    "authors": [
+        {
+            "name": "Thomas Soter",
+            "email":  "<thomas.soter@y-nov.com>"
+        },
+        {
+            "name": "Joffrey Dupire",
+            "email":  "<joffrey.dupire@y-nov.com>"
+        },
+        {
+            "name": "Paul Rey",
+            "email":  "<paul.rey@sryther.fr>"
+        }
+    ],
+    "license": "MIT"
+}
