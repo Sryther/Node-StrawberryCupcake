@@ -70,9 +70,14 @@ var app = angular.module('StrawberryCupcake',
     $scope.users = [];
     $scope.currentUser = {};
 
+    // Pagination
+    $scope.numPerPage = 20;
+    $scope.filteredUsers = [];
+    $scope.currentPage = 1;
+
     $scope.getAll = function() {
         $rootScope.toggleLoading();
-        $scope.users = User.all(null, function(data) {
+        User.all(null, function(data) {
             $scope.users = data;
             $rootScope.toggleLoading();
         }, function(error) {
@@ -88,6 +93,23 @@ var app = angular.module('StrawberryCupcake',
             $rootScope.setError(error.message);
         });
     }
+
+    $scope.numPages = function () {
+        return Math.ceil($scope.users.length / $scope.numPerPage);
+    };
+
+    $scope.pageChanged = function() {
+        var begin = (($scope.currentPage - 1) * $scope.numPerPage);
+        var end = begin + $scope.numPerPage;
+
+        $scope.filteredUsers = $scope.users.slice(begin, end);
+    };
+
+    $scope.$watch('users', function() {
+        if ($scope.users.length > 0) {
+            $scope.pageChanged();
+        }
+    });
 }]);
 ;app.factory('AuthService', ['$http', '$window', function($http, $window) {
     return {
@@ -131,6 +153,22 @@ var app = angular.module('StrawberryCupcake',
     })
     .state('dashboard', {
         url: "",
-        templateUrl: "/ng/dashboard/users.html"
+        templateUrl: "/ng/dashboard/home.html"
+    })
+    .state('users', {
+        url: "/users",
+        templateUrl: "/ng/users/all.html"
+    })
+    .state('users.get', {
+        url: "/:username",
+        templateUrl: "/ng/users/get.html"
+    })
+    .state('conversations', {
+        url: "/conversations",
+        templateUrl: "/ng/conversations/all.html"
+    })
+    .state('conversations.get', {
+        url: "/:username",
+        templateUrl: "/ng/conversations/get.html"
     })
 });

@@ -10,6 +10,22 @@ app.config(function($stateProvider, $urlRouterProvider) {
     })
     .state('dashboard', {
         url: "",
-        templateUrl: "/ng/dashboard/users.html"
+        templateUrl: "/ng/dashboard/home.html"
+    })
+    .state('users', {
+        url: "/users",
+        templateUrl: "/ng/users/all.html"
+    })
+    .state('users.get', {
+        url: "/:username",
+        templateUrl: "/ng/users/get.html"
+    })
+    .state('conversations', {
+        url: "/conversations",
+        templateUrl: "/ng/conversations/all.html"
+    })
+    .state('conversations.get', {
+        url: "/:username",
+        templateUrl: "/ng/conversations/get.html"
     })
 });

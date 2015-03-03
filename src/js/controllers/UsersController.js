@@ -3,9 +3,14 @@ app.controller('UsersController', ['$scope', '$rootScope', 'ResourceService', fu
     $scope.users = [];
     $scope.currentUser = {};
 
+    // Pagination
+    $scope.numPerPage = 20;
+    $scope.filteredUsers = [];
+    $scope.currentPage = 1;
+
     $scope.getAll = function() {
         $rootScope.toggleLoading();
-        $scope.users = User.all(null, function(data) {
+        User.all(null, function(data) {
             $scope.users = data;
             $rootScope.toggleLoading();
         }, function(error) {
@@ -21,4 +26,21 @@ app.controller('UsersController', ['$scope', '$rootScope', 'ResourceService', fu
             $rootScope.setError(error.message);
         });
     }
+
+    $scope.numPages = function () {
+        return Math.ceil($scope.users.length / $scope.numPerPage);
+    };
+
+    $scope.pageChanged = function() {
+        var begin = (($scope.currentPage - 1) * $scope.numPerPage);
+        var end = begin + $scope.numPerPage;
+
+        $scope.filteredUsers = $scope.users.slice(begin, end);
+    };
+
+    $scope.$watch('users', function() {
+        if ($scope.users.length > 0) {
+            $scope.pageChanged();
+        }
+    });
 }]);

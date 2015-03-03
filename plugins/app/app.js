@@ -34,12 +34,15 @@ module.exports = function(options, imports, register) {
     app.get("/", web.index); // Home
 
 
+    app.get("/dashboard", web.backend);
+
+
     /// API ///
     app.get("/api/users", users.all);
     app.get("/api/users/:username", users.get);
 
-
-    app.get("/dashboard", web.dashboard);
+    app.get("/api/conversations", users.all);
+    app.get("/api/conversations/:username", users.get);
 
     register(null, {
         "app": app

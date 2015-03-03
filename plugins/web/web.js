@@ -3,8 +3,8 @@ module.exports = function(options, imports, register) {
         index: function(req, res) {
             res.render("guest");
         },
-        dashboard: function(req, res) {
-            res.render("dashboard");
+        backend: function(req, res) {
+            res.render("backend");
         }
     };
 
