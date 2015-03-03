@@ -12,8 +12,15 @@ var config = [
         rootFolder: __dirname
     },
     {
+        packagePath: "./plugins/messages"
+    },
+    {
         packagePath: "./plugins/server",
         port: 8000
+    },
+    {
+        packagePath: "./plugins/api",
+        port: 8080
     }
 ];
 
@@ -24,5 +31,9 @@ var tree = architect.resolveConfig(config, __dirname);
 architect.createApp(tree, function(err, app) {
     if (err) console.log(err);
     var services = app.services;
-    services.server.launch();
+    var server = services.server;
+    var api = services.api;
+
+    api.launch();
+    server.launch();
 });

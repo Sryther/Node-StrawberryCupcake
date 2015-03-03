@@ -1,0 +1,10 @@
+{
+    "name": "messages",
+    "main": "messages.js",
+    "plugin": {
+        "consumes": [],
+        "provides": [
+            "messages"
+        ]
+    }
+}

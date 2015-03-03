@@ -1,0 +1,13 @@
+{
+    "name": "api",
+    "main": "api.js",
+    "plugin": {
+        "consumes": [
+            "http",
+            "messages"
+        ],
+        "provides": [
+            "api"
+        ]
+    }
+}

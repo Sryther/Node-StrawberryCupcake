@@ -1,0 +1,10 @@
+{
+    "name": "web",
+    "main": "web.js",
+    "plugin": {
+        "consumes": [],
+        "provides": [
+            "web"
+        ]
+    }
+}

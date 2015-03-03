@@ -1,0 +1,10 @@
+{
+    "name": "http",
+    "main": "http.js",
+    "plugin": {
+        "consumes": [],
+        "provides": [
+            "http"
+        ]
+    }
+}

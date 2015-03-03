@@ -1,0 +1,12 @@
+{
+    "name": "app",
+    "main": "app.js",
+    "plugin": {
+        "consumes": [
+            "web"
+        ],
+        "provides": [
+            "app"
+        ]
+    }
+}
