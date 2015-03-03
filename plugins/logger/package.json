@@ -1,0 +1,12 @@
+{
+    "name": "logger",
+    "main": "logger.js",
+    "plugin": {
+        "consumes": [
+            "http"
+        ],
+        "provides": [
+            "logger"
+        ]
+    }
+}

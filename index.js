@@ -12,14 +12,14 @@ var config = [
         rootFolder: __dirname
     },
     {
-        packagePath: "./plugins/messages"
+        packagePath: "./plugins/logger"
     },
     {
         packagePath: "./plugins/server",
         port: 8000
     },
     {
-        packagePath: "./plugins/api",
+        packagePath: "./plugins/chat",
         port: 8080
     }
 ];
@@ -32,8 +32,8 @@ architect.createApp(tree, function(err, app) {
     if (err) console.log(err);
     var services = app.services;
     var server = services.server;
-    var api = services.api;
+    var chat = services.chat;
 
-    api.launch();
+    chat.launch();
     server.launch();
 });

@@ -1,13 +1,13 @@
 {
-    "name": "api",
-    "main": "api.js",
+    "name": "chat",
+    "main": "chat.js",
     "plugin": {
         "consumes": [
             "http",
-            "messages"
+            "logger"
         ],
         "provides": [
-            "api"
+            "chat"
         ]
     }
 }
