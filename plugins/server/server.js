@@ -1,16 +1,14 @@
 module.exports = function(options, imports, register) {
-    var http = require('http');
+    var http = imports.http;
+    var app = imports.app;
     var server = {
         launch: function() {
             /* Launch the server */
-            http.createServer().listen(options.port, function() {
-                console.log("Server listening on port 8000");
+            http.createServer(app).listen(options.port, function() {
+                console.log("Server listening on port " + options.port);
             });
         }
     };
-
-
-    server.launch();
 
     register(null, {
         "server": server

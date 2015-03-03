@@ -1,29 +1,37 @@
 {
-    "name": "StrawberryCupcake",
-    "version": "0.0.1",
-    "description": "A new way to interact with your visitors",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "StrawberryCupcake",
+  "version": "0.0.1",
+  "description": "A new way to interact with your visitors",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "chat",
+    "nodejs"
+  ],
+  "author": "Paul Rey <paul.rey@sryther.fr>",
+  "contributors": [
+    {
+      "name": "Thomas Soter",
+      "email": "thomas.soter@y-nov.com"
     },
-    "keywords": [
-        "chat",
-        "nodejs"
-    ],
-    "author": "Paul Rey <paul.rey@sryther.fr>",
-    "contributors": [
-        {
-            "name": "Thomas Soter",
-            "email":  "thomas.soter@y-nov.com"
-        },
-        {
-            "name": "Joffrey Dupire",
-            "email":  "joffrey.dupire@y-nov.com"
-        }
-    ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Sryther/Node-StrawberryCupcake.git"
-    },
-    "license": "MIT"
+    {
+      "name": "Joffrey Dupire",
+      "email": "joffrey.dupire@y-nov.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sryther/Node-StrawberryCupcake.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.12.0",
+    "express": "^4.12.1",
+    "method-override": "^2.3.1",
+    "morgan": "^1.5.1",
+    "socket.io": "^1.3.4",
+    "swig": "^1.4.2"
+  }
 }

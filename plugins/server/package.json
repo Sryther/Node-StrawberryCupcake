@@ -3,6 +3,8 @@
     "main": "server.js",
     "plugin": {
         "consumes": [
+            "http",
+            "app"
         ],
         "provides": [
             "server"
