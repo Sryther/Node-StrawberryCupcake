@@ -21,6 +21,9 @@ var config = [
     {
         packagePath: "./plugins/chat",
         port: 8080
+    },
+    {
+        packagePath: "./plugins/db"
     }
 ];
 
@@ -33,6 +36,7 @@ architect.createApp(tree, function(err, app) {
     var services = app.services;
     var server = services.server;
     var chat = services.chat;
+    var db = services.db;
 
     chat.launch();
     server.launch();
