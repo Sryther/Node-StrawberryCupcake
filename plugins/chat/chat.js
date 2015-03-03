@@ -2,8 +2,9 @@ module.exports = function(options, imports, register) {
     /// IMPORTS ///
     var http = imports.http;
     var logger = imports.logger;
+    var db = imports.db;
 
-    var io = require('socket.io')(http); // TODO
+    var io = require('socket.io')(http);
 
     var chat = {
         launch: function() {

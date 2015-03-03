@@ -1,0 +1,10 @@
+{
+    "name": "db",
+    "main": "db.js",
+    "plugin": {
+        "consumes": [],
+        "provides": [
+            "db"
+        ]
+    }
+}
