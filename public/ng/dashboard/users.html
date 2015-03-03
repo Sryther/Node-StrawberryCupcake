@@ -1,0 +1,53 @@
+<div class="row" ng-controller="UsersController" ng-init="getAll()">
+    <div class="col-md-2 col-lg-2">
+        <strong>Filters</strong>
+
+    </div>
+    <div class="col-md-10 col-lg-10">
+        <div class="row">
+            0/0 Users connected
+        </div>
+        <div class="row">
+            <table class="table table-hover table-stripped">
+                <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" name="all" />
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Localisation
+                        </th>
+                        <th>
+                            Last seen
+                        </th>
+                        <th>
+                            Session
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="(key, user) in users">
+                        <td>
+                            <input type="checbox" name="check-{{ user.name }}" />
+                        </td>
+                        <td>
+                            {{ user.name }}
+                        </td>
+                        <td>
+                            {{ user.locale }}
+                        </td>
+                        <td>
+                            {{ user.last_seen }}
+                        </td>
+                        <td>
+                            {{ user.session }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

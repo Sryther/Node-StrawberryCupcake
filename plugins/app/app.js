@@ -33,6 +33,8 @@ module.exports = function(options, imports, register) {
     app.get("/", web.index); // Home
 
 
+    app.get("/dashboard", web.dashboard);
+
     register(null, {
         "app": app
     })

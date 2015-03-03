@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Strawberry Cupcake</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/bootflat/css/custom-bootflat.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js"></script>
+        <script src="/assets/js/ui-bootstrap.min.js"></script>
+        <script src="/assets/js/ui-router.min.js"></script>
+        <script src="/assets/js/ng-cookies.min.js"></script>
+        <script src="/assets/js/ng-resource.min.js"></script>
+
+        <script src="/assets/js/StrawberryCupcake.js"></script>
+        <!--[if lt IE 9]>
+            <script src="bower_components/html5shiv/dist/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+    <body ng-app="StrawberryCupcake">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Strawberry Cupcake</a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/users">Users</a></li>
+                        <li><a href="/conversations">Conversations</a></li>
+                    </ul>
+                    <form class="navbar-form pull-right" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default">
+                            <i class="fa fa-search fa-fw"></i>
+                        </button>
+                        <a href="/logout" class="btn btn-default">
+                            <i class="fa fa-power-off fa-fw"></i>
+                        </a>
+                    </form>
+                </div>
+            </div><!-- /.container-fluid -->
+        </nav>
+        <div class="container">
+            <div ng-controller="ErrorsController" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="over">
+                    <br/>
+                    <div class="alert alert-danger alert-dismissable" ng-if="error">
+                        <button type="button" class="close" ng-click="unsetError()" aria-hidden="true">×</button>
+                        <strong>Erreur !</strong> {{messageError}}
+                    </div>
+                    <div class="alert alert-success alert-dismissable" ng-if="success">
+                        <button type="button" class="close" ng-click="unsetSuccess()" aria-hidden="true">×</button>
+                        <strong>Succès !</strong> {{messageSuccess}}
+                    </div>
+                </div>
+                <div class="over">
+                    <br/>
+                    <div class="alert alert-info" ng-if="loading">
+                        <center>
+                            <i class="fa fa-circle-o-notch fa-spin"></i>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ui-view></div>
+    </body>
+</html>
