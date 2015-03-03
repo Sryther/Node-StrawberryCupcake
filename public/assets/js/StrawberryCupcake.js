@@ -61,6 +61,10 @@ var app = angular.module('StrawberryCupcake',
         $scope.success        = false;
     }
 }]);
+;app.controller('TableController', ['$scope', function($scope) {
+    $scope.orderByField = 'firstName';
+    $scope.reverseSort = false;
+}]);
 ;app.controller('UsersController', ['$scope', '$rootScope', 'ResourceService', function ($scope, $rootScope, ResourceService) {
     var User = ResourceService.User;
     $scope.users = [];

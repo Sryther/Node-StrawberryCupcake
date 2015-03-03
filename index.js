@@ -8,6 +8,9 @@ var config = [
         packagePath: "./plugins/web"
     },
     {
+        packagePath: "./plugins/users"
+    },
+    {
         packagePath: "./plugins/app",
         rootFolder: __dirname
     },
@@ -19,8 +22,7 @@ var config = [
         port: 8000
     },
     {
-        packagePath: "./plugins/chat",
-        port: 8080
+        packagePath: "./plugins/chat"
     },
     {
         packagePath: "./plugins/db"

@@ -4,8 +4,7 @@
     "plugin": {
         "consumes": [
             "http",
-            "logger",
-            "db"
+            "logger"
         ],
         "provides": [
             "chat"

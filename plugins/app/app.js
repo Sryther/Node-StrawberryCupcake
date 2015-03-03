@@ -8,6 +8,7 @@ module.exports = function(options, imports, register) {
 
     /// IMPORTS ///
     var web = imports.web;
+    var users = imports.users;
 
     /// CONFIGURATION ///
     app.use(express["static"](options.rootFolder + '/public')); // TODO
@@ -31,6 +32,11 @@ module.exports = function(options, imports, register) {
     /// ROUTES ///
 
     app.get("/", web.index); // Home
+
+
+    /// API ///
+    app.get("/api/users", users.all);
+    app.get("/api/users/:username", users.get);
 
 
     app.get("/dashboard", web.dashboard);

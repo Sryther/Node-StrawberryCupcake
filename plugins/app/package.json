@@ -3,7 +3,8 @@
     "main": "app.js",
     "plugin": {
         "consumes": [
-            "web"
+            "web",
+            "users"
         ],
         "provides": [
             "app"

@@ -1,4 +1,4 @@
-<div class="row" ng-controller="UsersController" ng-init="getAll()">
+<div class="row" ng-controller="UsersController" ng-init="getAll()" style="margin-right: 0px;">
     <div class="col-md-2 col-lg-2">
         <strong>Filters</strong>
 
@@ -8,33 +8,33 @@
             0/0 Users connected
         </div>
         <div class="row">
-            <table class="table table-hover table-stripped">
+            <table class="table table-hover table-stripped" ng-controller="TableController">
                 <thead>
                     <tr>
                         <th>
                             <input type="checkbox" name="all" />
                         </th>
-                        <th>
+                        <th class="noselect pointer" ng-click="orderByField='fullname'; reverseSort = !reverseSort">
                             Name
                         </th>
-                        <th>
+                        <th class="noselect pointer" ng-click="orderByField='locale'; reverseSort = !reverseSort">
                             Localisation
                         </th>
-                        <th>
+                        <th class="noselect pointer" ng-click="orderByField='last_seen'; reverseSort = !reverseSort">
                             Last seen
                         </th>
-                        <th>
+                        <th class="noselect pointer" ng-click="orderByField='session'; reverseSort = !reverseSort">
                             Session
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="(key, user) in users">
+                    <tr ng-repeat="(key, user) in users|orderBy:orderByField:reverseSort">
                         <td>
-                            <input type="checbox" name="check-{{ user.name }}" />
+                            <input type="checkbox" name="check-{{ user.name }}" />
                         </td>
                         <td>
-                            {{ user.name }}
+                            {{ user.fullname }}
                         </td>
                         <td>
                             {{ user.locale }}

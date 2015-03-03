@@ -1,0 +1,12 @@
+{
+    "name": "users",
+    "main": "users.js",
+    "plugin": {
+        "consumes": [
+            "db"
+        ],
+        "provides": [
+            "users"
+        ]
+    }
+}
