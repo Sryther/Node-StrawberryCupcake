@@ -9,6 +9,7 @@ module.exports = function(options, imports, register) {
     /// IMPORTS ///
     var web = imports.web;
     var users = imports.users;
+    var conversations = imports.conversations;
 
     /// CONFIGURATION ///
     app.use(express["static"](options.rootFolder + '/public')); // TODO
@@ -41,8 +42,8 @@ module.exports = function(options, imports, register) {
     app.get("/api/users", users.all);
     app.get("/api/users/:username", users.get);
 
-    app.get("/api/conversations", users.all);
-    app.get("/api/conversations/:username", users.get);
+    app.get("/api/conversations", conversations.all);
+    app.get("/api/conversations/:username", conversations.get);
 
     register(null, {
         "app": app

@@ -1,7 +1,12 @@
-app.controller('UsersController', ['$scope', '$rootScope', 'ResourceService', function ($scope, $rootScope, ResourceService) {
+app.controller('ConversationsController', ['$scope', '$rootScope', '$stateParams', 'ResourceService', function ($scope, $rootScope, $stateParams, ResourceService) {
     var Conversation = ResourceService.Conversation;
-    $scope.conversation = [];
+    $scope.conversations = [];
     $scope.currentConversation = {};
+    $scope.username = "";
+
+    if ($stateParams.username) {
+        $scope.username = $stateParams.username;
+    }
 
     $scope.getAll = function() {
         $rootScope.toggleLoading();
@@ -15,8 +20,12 @@ app.controller('UsersController', ['$scope', '$rootScope', 'ResourceService', fu
     }
 
     $scope.get = function(id) {
-        Conversation.get({id: id}, function(data) {
+        Conversation.all({id: id}, function(data) {
             $scope.currentConversation = data;
+            angular.forEach($scope.currentConversation, function(v, k) {
+                var date = new Date(v.datetime);
+                $scope.currentConversation[k].datetime = date.toDateString() + ' ' + date.toLocaleTimeString();
+            });
         }, function(error) {
             $rootScope.setError(error.message);
         });

@@ -19,13 +19,16 @@
 				<thead>
 					<tr>
 						<th>
-							<input type="checkbox" name="all" />
+							<input type="checkbox"  icheck ng-model="selectAll.isSelected" />
 						</th>
 						<th class="noselect pointer" ng-click="orderByField='fullname'; reverseSort = !reverseSort">
 							Name
 						</th>
-						<th class="noselect pointer" ng-click="orderByField='locale'; reverseSort = !reverseSort">
-							Localisation
+						<th class="noselect pointer" ng-click="orderByField='country'; reverseSort = !reverseSort">
+							Country
+						</th>
+						<th class="noselect pointer" ng-click="orderByField='city'; reverseSort = !reverseSort">
+							City
 						</th>
 						<th class="noselect pointer" ng-click="orderByField='last_seen'; reverseSort = !reverseSort">
 							Last seen
@@ -38,18 +41,21 @@
 				<tbody>
 					<tr ng-repeat="(key, user) in filteredUsers|filter:trackedExpression|orderBy:orderByField:reverseSort">
 						<td>
-							<input type="checkbox" name="check-{{ user.username }}" />
+							<input icheck ng-model="user.isSelected" type="checkbox" />
 						</td>
 						<td>
-							<a ui-sref="users.get({username: user.username})">
+							<a ui-sref="getUser({username: user.username})">
 								{{ user.fullname }}
 							</a>
-							<a ui-sref="conversations.get({username: user.username})" class="pull-right btn-link">
+							<a ui-sref="getConversation({username: user.username})" class="pull-right btn-link">
 								<i class="fa fa-comment fa-fw"></i>
 							</a>
 						</td>
 						<td>
-							{{ user.locale }}
+							{{ user.country }}
+						</td>
+						<td>
+							{{ user.city }}
 						</td>
 						<td>
 							{{ user.last_seen }}
@@ -63,13 +69,13 @@
 			<div class="row"></div>
 			<center ng-if="events.length > numPerPage">
 				<pagination
-				ng-change="pageChanged()"
-				max-size="20"
-				boundary-links="true"
-				total-items="users.length"
-				items-per-page="numPerPage"
-				ng-model="currentPage"
-				previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+					ng-change="pageChanged()"
+					max-size="20"
+					boundary-links="true"
+					total-items="users.length"
+					items-per-page="numPerPage"
+					ng-model="currentPage"
+					previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
 				></pagination>
 			</center>
 		</div>

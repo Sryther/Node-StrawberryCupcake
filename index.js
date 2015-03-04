@@ -11,6 +11,9 @@ var config = [
         packagePath: "./plugins/users"
     },
     {
+        packagePath: "./plugins/conversations"
+    },
+    {
         packagePath: "./plugins/app",
         rootFolder: __dirname
     },

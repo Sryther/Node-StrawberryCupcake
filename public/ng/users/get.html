@@ -1,0 +1,30 @@
+<div class="container" ng-controller="UsersController" ng-init="get(username)">
+	<h1>
+		{{ currentUser.fullname }} <small>{{ currentUser.username }}</small>
+	</h1>
+
+	<div class="row">
+		<div class="col-md-6 col-lg-6">
+			<h5>About this person</h5>
+			<div>
+				<label>Last seen:</label> {{ currentUser.last_seen }}
+			</div>
+			<div>
+				<label>Last localisation:</label> {{ currentUser.city }}, {{ currentUser.country }}
+			</div>
+			<h5>Conversation</h5>
+			<a ui-sref="getConversation({username: currentUser.username})">
+				See full conversation
+			</a>
+			<h5>Contact</h5>
+			<div>
+				<label>Email:</label> <a href="mailto:{{ currentUser.email }}">{{ currentUser.email || "not defined"}}</a>
+			</div>
+		</div>
+		<div class="col-md-6 col-lg-6">
+			<h5>Where is {{ currentUser.fullname }} ?</h5>
+			<ui-gmap-google-map center="map.center" zoom="map.zoom">
+				<ui-gmap-marker coords="map.center" idKey="1"></ui-gmap-marker>
+			</ui-gmap-google-map>
+		</div>
+</div>

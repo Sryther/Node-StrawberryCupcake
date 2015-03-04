@@ -5,6 +5,7 @@
         <title>Strawberry Cupcake</title>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="/assets/bootflat/css/custom-bootflat.min.css">
+        <link rel="stylesheet" href="/assets/bootflat/skin/square/green.css" media="screen" charset="utf-8">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
         <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
@@ -15,6 +16,9 @@
         <script src="/assets/js/ui-router.min.js"></script>
         <script src="/assets/js/ng-cookies.min.js"></script>
         <script src="/assets/js/ng-resource.min.js"></script>
+        <script src="/assets/js/lodash.min.js"></script>
+        <script src="/assets/js/angular-google-maps.min.js"></script>
+        <script src="/assets/bootflat/js/icheck.min.js"></script>
 
         <script src="/assets/js/StrawberryCupcake.js"></script>
         <!--[if lt IE 9]>
@@ -22,11 +26,13 @@
         <![endif]-->
     </head>
     <body ng-app="StrawberryCupcake">
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-default" style="border-radius: 0;">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="/dashboard/">Strawberry Cupcake</a>
+                    <a class="navbar-brand" href="/dashboard/">
+                        Strawberry Cupcake
+                    </a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
@@ -74,6 +80,6 @@
                 </div>
             </div>
         </div>
-        <div ui-view></div>
+        <div ui-view class="content"></div>
     </body>
 </html>

@@ -4,7 +4,9 @@ module.exports = function(options, imports, register) {
     var userSchema = mongoose.Schema({
         "fullname" : String,
         "username" : String,
-        "locale" : String,
+        "country" : String,
+        "city": String,
+        "geo": String,
         "last_seen" : String,
         "session" : Number
     });
@@ -19,7 +21,7 @@ module.exports = function(options, imports, register) {
             });
         },
         get: function(req, res) {
-            User.find({ username: req.params.username }, function (err, user) {
+            User.findOne({ username: req.params.username }, function (err, user) {
                 if (err) return console.error(err);
                 res.json(user)
             });

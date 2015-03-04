@@ -1,0 +1,12 @@
+{
+    "name": "conversations",
+    "main": "conversations.js",
+    "plugin": {
+        "consumes": [
+            "db"
+        ],
+        "provides": [
+            "conversations"
+        ]
+    }
+}

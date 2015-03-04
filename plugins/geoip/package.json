@@ -1,0 +1,10 @@
+{
+    "name": "geop",
+    "main": "geoip.js",
+    "plugin": {
+        "consumes": [],
+        "provides": [
+            "geoip"
+        ]
+    }
+}

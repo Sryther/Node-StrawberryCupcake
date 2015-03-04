@@ -3,13 +3,26 @@ var app = angular.module('StrawberryCupcake',
         'ui.router',
         'ui.bootstrap',
         'ngCookies',
-        'ngResource'
+        'ngResource',
+        'uiGmapgoogle-maps'
     ]
 );
-;;app.controller('UsersController', ['$scope', '$rootScope', 'ResourceService', function ($scope, $rootScope, ResourceService) {
+;app.config(function(uiGmapGoogleMapApiProvider) {
+    uiGmapGoogleMapApiProvider.configure({
+        key: 'AIzaSyBMA4UIe4S5OjrZlNQx6DDME-xFxg0r-2w',
+        v: '3.17',
+        libraries: 'weather,geometry,visualization'
+    });
+})
+;app.controller('ConversationsController', ['$scope', '$rootScope', '$stateParams', 'ResourceService', function ($scope, $rootScope, $stateParams, ResourceService) {
     var Conversation = ResourceService.Conversation;
-    $scope.conversation = [];
+    $scope.conversations = [];
     $scope.currentConversation = {};
+    $scope.username = "";
+
+    if ($stateParams.username) {
+        $scope.username = $stateParams.username;
+    }
 
     $scope.getAll = function() {
         $rootScope.toggleLoading();
@@ -23,8 +36,12 @@ var app = angular.module('StrawberryCupcake',
     }
 
     $scope.get = function(id) {
-        Conversation.get({id: id}, function(data) {
+        Conversation.all({id: id}, function(data) {
             $scope.currentConversation = data;
+            angular.forEach($scope.currentConversation, function(v, k) {
+                var date = new Date(v.datetime);
+                $scope.currentConversation[k].datetime = date.toDateString() + ' ' + date.toLocaleTimeString();
+            });
         }, function(error) {
             $rootScope.setError(error.message);
         });
@@ -65,20 +82,31 @@ var app = angular.module('StrawberryCupcake',
     $scope.orderByField = 'firstName';
     $scope.reverseSort = false;
 }]);
-;app.controller('UsersController', ['$scope', '$rootScope', 'ResourceService', function ($scope, $rootScope, ResourceService) {
+;app.controller('UsersController', ['$scope', '$rootScope', '$stateParams', 'ResourceService', 'uiGmapGoogleMapApi', function ($scope, $rootScope, $stateParams, ResourceService, uiGmapGoogleMapApi) {
     var User = ResourceService.User;
     $scope.users = [];
     $scope.currentUser = {};
+
+    if ($stateParams.username) {
+        $scope.username = $stateParams.username;
+    }
 
     // Pagination
     $scope.numPerPage = 20;
     $scope.filteredUsers = [];
     $scope.currentPage = 1;
 
+    $scope.selectAll = {
+        isSelected: false
+    };
+
     $scope.getAll = function() {
         $rootScope.toggleLoading();
         User.all(null, function(data) {
             $scope.users = data;
+            angular.forEach($scope.users, function(v, k) {
+                $scope.users[k].isSelected = false;
+            });
             $rootScope.toggleLoading();
         }, function(error) {
             $rootScope.toggleLoading();
@@ -86,9 +114,18 @@ var app = angular.module('StrawberryCupcake',
         });
     }
 
-    $scope.get = function(id) {
-        User.get({id: id}, function(data) {
+    $scope.get = function(username) {
+        User.get({id: username}, function(data) {
             $scope.currentUser = data;
+
+            $scope.currentUser.geo = $scope.currentUser.geo.split(",");
+            $scope.map = {
+                center: {
+                    latitude: $scope.currentUser.geo[0],
+                    longitude: $scope.currentUser.geo[1]
+                },
+                 zoom: 10
+            };
         }, function(error) {
             $rootScope.setError(error.message);
         });
@@ -110,6 +147,59 @@ var app = angular.module('StrawberryCupcake',
             $scope.pageChanged();
         }
     });
+
+    $scope.$watch('selectAll.isSelected', function() {
+        $scope.all();
+    });
+
+    $scope.all = function() {
+        angular.forEach($scope.users, function (v, k) {
+            $scope.users[k].isSelected = $scope.selectAll.isSelected;
+        });
+    };
+
+    uiGmapGoogleMapApi.then(function(maps) {
+        $scope.map = {
+            center: {
+                latitude: 0,
+                longitude: 0
+            },
+             zoom: 8
+        };
+    });
+}]);
+;app.directive('icheck', ['$timeout', function($timeout) {
+	return {
+		require: 'ngModel',
+		link: function($scope, element, $attrs, ngModel) {
+			return $timeout(function() {
+				var value;
+				value = $attrs['value'];
+
+				$scope.$watch($attrs['ngModel'], function(newValue){
+					$(element).iCheck('update');
+				})
+
+				return $(element).iCheck({
+					checkboxClass: 'icheckbox_square-green',
+					radioClass: 'iradio_square-green',
+					increaseArea: '20%'
+
+				}).on('ifChanged', function(event) {
+					if ($(element).attr('type') === 'checkbox' && $attrs['ngModel']) {
+						$scope.$apply(function() {
+							return ngModel.$setViewValue(event.target.checked);
+						});
+					}
+					if ($(element).attr('type') === 'radio' && $attrs['ngModel']) {
+						return $scope.$apply(function() {
+							return ngModel.$setViewValue(value);
+						});
+					}
+				});
+			});
+		}
+	};
 }]);
 ;app.factory('AuthService', ['$http', '$window', function($http, $window) {
     return {
@@ -159,16 +249,16 @@ var app = angular.module('StrawberryCupcake',
         url: "/users",
         templateUrl: "/ng/users/all.html"
     })
-    .state('users.get', {
-        url: "/:username",
+    .state('getUser', {
+        url: "/users/:username",
         templateUrl: "/ng/users/get.html"
     })
     .state('conversations', {
         url: "/conversations",
         templateUrl: "/ng/conversations/all.html"
     })
-    .state('conversations.get', {
-        url: "/:username",
+    .state('getConversation', {
+        url: "/conversations/:username",
         templateUrl: "/ng/conversations/get.html"
     })
 });

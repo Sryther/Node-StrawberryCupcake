@@ -16,16 +16,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
         url: "/users",
         templateUrl: "/ng/users/all.html"
     })
-    .state('users.get', {
-        url: "/:username",
+    .state('getUser', {
+        url: "/users/:username",
         templateUrl: "/ng/users/get.html"
     })
     .state('conversations', {
         url: "/conversations",
         templateUrl: "/ng/conversations/all.html"
     })
-    .state('conversations.get', {
-        url: "/:username",
+    .state('getConversation', {
+        url: "/conversations/:username",
         templateUrl: "/ng/conversations/get.html"
     })
 });

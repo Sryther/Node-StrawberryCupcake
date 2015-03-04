@@ -1,0 +1,27 @@
+<div ng-controller="ConversationsController" ng-init="get(username)">
+	<div class="container">
+		<div ng-controller="UsersController" ng-init="get(username)">
+			<h1>Conversation with {{ currentUser.fullname }} <small>{{ currentUser.username }}</small></h1>
+		</div>
+			<div class="row conversation">
+				<div ng-repeat="(key, message) in currentConversation">
+					<div ng-class="{'bubble-left' : message.sender == username, 'bubble-right' : message.sender != username}">
+						{{ message.message }}
+						<div class="bubble-footer">
+							{{ message.datetime }}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row response">
+				<form>
+					<div class="col-md-11 col-lg-11">
+						<input type="text" class="form-control" placeHolder="Your message" />
+					</div>
+					<div class="col-md-1 col-lg-1">
+						<button class="btn btn-primary btn-large">Send</button>
+					</div>
+				</form>
+			</div>
+	</div>
+</div>

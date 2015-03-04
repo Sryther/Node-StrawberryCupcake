@@ -4,7 +4,8 @@
     "plugin": {
         "consumes": [
             "web",
-            "users"
+            "users",
+            "conversations"
         ],
         "provides": [
             "app"
