@@ -8,7 +8,7 @@ A new way to interact with your visitors
 
 ### DBMS
 
-![MongoDB](http://media.mongodb.org/logo-mongodb-header.png)
+![MongoDB](http://jstricks.com/wp-content/uploads/2014/10/mongodb-gui-tools.png)
 
 [MongoDB](http://www.mongodb.org/)
 
