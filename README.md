@@ -8,7 +8,7 @@ A new way to interact with your visitors
 
 ### DBMS
 
-![MongoDB](http://photos3.meetupstatic.com/photos/event/c/9/7/c/highres_14391580.jpeg)
+![MongoDB](http://media.mongodb.org/logo-mongodb-header.png)
 
 [MongoDB](http://www.mongodb.org/)
 
