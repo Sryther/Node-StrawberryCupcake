@@ -15,8 +15,6 @@ module.exports = function(options, imports, register) {
     app.use(express["static"](options.rootFolder + '/public')); // TODO
     app.use(morgan('dev')); // Log every request to the console
     app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(bodyParser.json());
-    app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
     app.use(function (req, res, next) {
         console.log(req.body);
         next();
@@ -26,13 +24,13 @@ module.exports = function(options, imports, register) {
     app.engine('html', swig.renderFile);
     app.set('views', options.rootFolder + '/views');
     app.set('view engine', 'html');
-    app.set('view cache', false);
+    app.set('view cache', false); // True in production
     swig.setDefaults({ cache: false });
-    app.set('view engine', 'html');
 
     /// ROUTES ///
 
     app.get("/", web.index); // Home
+    app.get("/chat/:id", web.chat); // Remove in production
 
 
     app.get("/dashboard", web.backend);

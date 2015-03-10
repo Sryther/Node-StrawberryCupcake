@@ -2,9 +2,6 @@ var architect = require('./architect');
 
 var config = [
     {
-        packagePath: "./plugins/http"
-    },
-    {
         packagePath: "./plugins/web"
     },
     {
@@ -40,9 +37,6 @@ architect.createApp(tree, function(err, app) {
     if (err) console.log(err);
     var services = app.services;
     var server = services.server;
-    var chat = services.chat;
     var db = services.db;
-
-    chat.launch();
     server.launch();
 });

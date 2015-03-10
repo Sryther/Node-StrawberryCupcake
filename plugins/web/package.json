@@ -2,7 +2,9 @@
     "name": "web",
     "main": "web.js",
     "plugin": {
-        "consumes": [],
+        "consumes": [
+            "chat"
+        ],
         "provides": [
             "web"
         ]

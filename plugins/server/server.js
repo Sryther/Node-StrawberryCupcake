@@ -1,5 +1,5 @@
 module.exports = function(options, imports, register) {
-    var http = imports.http;
+    var http = require('http');
     var app = imports.app;
     var server = {
         launch: function() {

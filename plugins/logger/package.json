@@ -2,9 +2,7 @@
     "name": "logger",
     "main": "logger.js",
     "plugin": {
-        "consumes": [
-            "http"
-        ],
+        "consumes": [],
         "provides": [
             "logger"
         ]

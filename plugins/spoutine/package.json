@@ -1,12 +1,12 @@
 {
-    "name": "server",
-    "main": "server.js",
+    "name": "spoutine",
+    "main": "spoutine.js",
     "plugin": {
         "consumes": [
-            "app"
+            "db"
         ],
         "provides": [
-            "server"
+            "spoutine"
         ]
     }
 }
