@@ -15,17 +15,18 @@ module.exports = function(options, imports, register) {
                 });
 
                 ids[id].on('connection', function(socket) {
+                    console.log(socket)
                     nbUsersConnected++;
                     console.info('A new user is connected in chat n°'+id);
-                    ids[id].emit('message', "A new user entered the chat");
+                    ids[id].emit('welcome', "System#Welcome!");
 
-                    socket.on('chat message', function(msg) {
+                    socket.on('message', function(msg) {
                         console.log(msg, id);
                         ids[id].emit('message', msg);
                     });
                     socket.on('disconnect', function(){
                         nbUsersConnected--;
-                        console.info('A user just disconnected');
+                        console.info('System#A user just disconnected');
                         // Destroy the socket if no user connected to it
                         if (nbUsersConnected == 0) {
                             socket.leave('/chat/'+id);

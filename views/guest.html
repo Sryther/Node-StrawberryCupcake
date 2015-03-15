@@ -1,49 +1,27 @@
 {% extends 'layouts/master.html' %}
 {% block script %}
-<link type="text/css" href="css/jquery.ui.chatbox.css" rel="stylesheet"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css" />
-<script src=" http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.js"></script>
-<script type="text/javascript" src="js/jquery.ui.chatbox.js"></script>
-<script type="text/javascript" src="js/chatboxManager.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
+    <link type="text/css" href="/assets/css/jquery.ui.chatbox.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/assets/css/jquery-ui-1.9.2.custom.css" />
 
-      var counter = 0;
-      var idList = new Array();
-
-      var broadcastMessageCallback = function(from, msg) {
-          for(var i = 0; i < idList.length; i ++) {
-              chatboxManager.addBox(idList[i]);
-              $("#" + idList[i]).chatbox("option", "boxManager").addMsg(from, msg);
-          }
-      }
-
-
-      // chatboxManager is excerpt from the original project
-      // the code is not very clean, I just want to reuse it to manage multiple chatboxes
-      chatboxManager.init({messageSent : broadcastMessageCallback});
-
-      $(document).ready(function() {
-        var id = "box";
-        chatboxManager
-                .addBox(id, 
-                {
-                        dest:"dest",
-                        title:"box",
-                        first_name:"Guest_",
-                        last_name:"42"
-                 }
-        );
-      });
-});
-</script>
-<style type="text/css">
-        h1 {color : red;}
-</style>
+    <script src="//cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.2.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
+    <script src="/assets/js/chat/jquery.ui.chatbox.js"></script>
+    <script src="/assets/js/chat/chatboxManager.js"></script>
+    <script>
+        var socket = io(":8080/chat/{{ token }}");
+    </script>
+    <script src="/assets/js/chat/chat.js"></script>
 {% endblock %}
 {% block body %}
-
-	<h1>Welcome Home</h1>
-
+<div class="container">
+	<h1>Welcome home !</h1>
+    <a href="/dashboard/" target="_blank" class="btn btn-primary">
+        <i class="fa fa-cog fa-fw"></i> Go to dashboard
+    </a>
+    <br />
+    <br />
+    Debug: <code>{{ token }}</code>
+</div>
 {% endblock %}

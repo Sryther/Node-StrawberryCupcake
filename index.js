@@ -2,6 +2,9 @@ var architect = require('./architect');
 
 var config = [
     {
+        packagePath: "./plugins/spoutine"
+    },
+    {
         packagePath: "./plugins/web"
     },
     {

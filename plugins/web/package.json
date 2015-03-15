@@ -3,7 +3,8 @@
     "main": "web.js",
     "plugin": {
         "consumes": [
-            "chat"
+            "chat",
+            "spoutine"
         ],
         "provides": [
             "web"

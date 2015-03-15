@@ -5,6 +5,7 @@ module.exports = function(options, imports, register) {
     var bodyParser = require('body-parser');
     var methodOverride = require('method-override');
     var swig = require('swig');
+    var cookieParser = require('cookie-parser');
 
     /// IMPORTS ///
     var web = imports.web;
@@ -15,6 +16,7 @@ module.exports = function(options, imports, register) {
     app.use(express["static"](options.rootFolder + '/public')); // TODO
     app.use(morgan('dev')); // Log every request to the console
     app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(cookieParser());
     app.use(function (req, res, next) {
         console.log(req.body);
         next();

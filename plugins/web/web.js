@@ -3,15 +3,25 @@ module.exports = function(options, imports, register) {
     var randomizerSpoutine = imports.spoutine;
     var web = {
         index: function(req, res) {
-            res.append('Set-Cookie', 'id=');
-            res.render("guest");
+            var token = req.cookies.token;
+            if (token === undefined) {
+                randomizerSpoutine.create(function(err, token) {
+                    if (err) console.error(err);
+                    token = token;
+                    res.append('Set-Cookie', 'token='+token);
+                    chat.launch(token);
+                    res.render("guest", {token: token});
+                });
+            } else {
+                chat.launch(token);
+                res.render("guest", {token: token});
+            }
         },
         backend: function(req, res) {
             res.render("backend");
         },
         chat: function(req, res) {
             var id = req.params.id;
-            chat.launch(id);
             res.render("chat", {id: id});
         }
     };
