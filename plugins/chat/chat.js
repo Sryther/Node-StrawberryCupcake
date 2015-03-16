@@ -1,5 +1,6 @@
 module.exports = function(options, imports, register) {
     /// IMPORTS ///
+    var conversations = imports.conversations;
     var io = require('socket.io')(8080);
 
     var ids = [];
@@ -15,13 +16,25 @@ module.exports = function(options, imports, register) {
                 });
 
                 ids[id].on('connection', function(socket) {
-                    console.log(socket)
                     nbUsersConnected++;
+                    
                     console.info('A new user is connected in chat n°'+id);
+
                     ids[id].emit('welcome', "System#Welcome!");
 
                     socket.on('message', function(msg) {
                         console.log(msg, id);
+                        // Save
+                        var arr = msg.split("#");
+                        var conv = {
+                            "username_client" : (id + "").substring(0, 6),
+                            "sender": arr[0],
+                    		"message": arr[1],
+                            "datetime" : Date.now(),
+                    		"end": false,
+                            "session": id
+                        }
+                        conversations.save(conv);
                         ids[id].emit('message', msg);
                     });
                     socket.on('disconnect', function(){

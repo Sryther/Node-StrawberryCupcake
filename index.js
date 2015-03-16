@@ -2,6 +2,12 @@ var architect = require('./architect');
 
 var config = [
     {
+        packagePath: "./plugins/geoip"
+    },
+    {
+        packagePath: "./plugins/tracker"
+    },
+    {
         packagePath: "./plugins/spoutine"
     },
     {

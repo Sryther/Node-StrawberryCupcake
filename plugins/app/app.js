@@ -43,7 +43,7 @@ module.exports = function(options, imports, register) {
     app.get("/api/users/:username", users.get);
 
     app.get("/api/conversations", conversations.all);
-    app.get("/api/conversations/:username", conversations.get);
+    app.get("/api/conversations/:session", conversations.get);
 
     register(null, {
         "app": app

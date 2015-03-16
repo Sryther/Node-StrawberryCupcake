@@ -25,7 +25,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         templateUrl: "/ng/conversations/all.html"
     })
     .state('getConversation', {
-        url: "/conversations/:username",
+        url: "/conversations/:session/:username",
         templateUrl: "/ng/conversations/get.html"
     })
 });

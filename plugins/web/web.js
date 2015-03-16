@@ -5,7 +5,7 @@ module.exports = function(options, imports, register) {
         index: function(req, res) {
             var token = req.cookies.token;
             if (token === undefined) {
-                randomizerSpoutine.create(function(err, token) {
+                randomizerSpoutine.create(req.connection.remoteAddress, function(err, token) {
                     if (err) console.error(err);
                     token = token;
                     res.append('Set-Cookie', 'token='+token);

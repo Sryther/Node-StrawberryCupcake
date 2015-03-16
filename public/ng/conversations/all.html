@@ -1,1 +1,71 @@
-<h1>Conversations</h1>
+<div class="row" ng-controller="ConversationsController" ng-init="getAll()" style="margin-right: 0px;">
+	<div class="col-md-2 col-lg-2">
+		<div style="margin-left: 5px;">
+			<strong>Filters</strong>
+
+			<h6>Track expression</h6>
+			<div class="form-search search-only">
+				<i class="search-icon fa fa-search"></i>
+				<input type="text" class="form-control search-query" ng-model="trackedExpression" placeHolder="Search">
+			</div>
+		</div>
+	</div>
+	<div class="col-md-10 col-lg-10">
+		<div class="row">
+			{{ filteredConversations.length }}/{{ conversations.length }} Conversations
+		</div>
+		<div class="row">
+			<table class="table table-hover table-stripped" ng-controller="TableController">
+				<thead>
+					<tr>
+						<th>
+							<input type="checkbox"  icheck ng-model="selectAll.isSelected" />
+						</th>
+						<th class="noselect pointer" ng-click="orderByField='username_client'; reverseSort = !reverseSort">
+							Name
+						</th>
+						<th class="noselect pointer" ng-click="orderByField='session'; reverseSort = !reverseSort">
+							Session
+						</th>
+						<th class="noselect pointer" ng-click="orderByField='last_message'; reverseSort = !reverseSort">
+							Last message
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="(key, conversation) in filteredConversations|filter:trackedExpression|orderBy:orderByField:reverseSort">
+						<td>
+							<input icheck ng-model="conversation.isSelected" type="checkbox" />
+						</td>
+						<td>
+							<a ui-sref="getUser({username: conversation.username_client})">
+								{{ conversation.username_client }}
+							</a>
+							<a ui-sref="getConversation({session: conversation.session, username: conversation.username_client})" class="pull-right btn-link">
+								<i class="fa fa-comment fa-fw"></i>
+							</a>
+						</td>
+						<td>
+							{{ conversation.session }}
+						</td>
+						<td>
+							{{ conversation.datetime }}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="row"></div>
+			<center ng-if="conversations.length > numPerPage">
+				<pagination
+					ng-change="pageChanged()"
+					max-size="20"
+					boundary-links="true"
+					total-items="conversations.length"
+					items-per-page="numPerPage"
+					ng-model="currentPage"
+					previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+				></pagination>
+			</center>
+		</div>
+	</div>
+</div>

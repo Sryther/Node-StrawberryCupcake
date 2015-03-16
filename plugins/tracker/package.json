@@ -1,0 +1,14 @@
+{
+    "name": "tracker",
+    "main": "tracker.js",
+    "plugin": {
+        "consumes": [
+            "db",
+            "geoip",
+            "users"
+        ],
+        "provides": [
+            "tracker"
+        ]
+    }
+}

@@ -4,6 +4,7 @@ var app = angular.module('StrawberryCupcake',
         'ui.bootstrap',
         'ngCookies',
         'ngResource',
-        'uiGmapgoogle-maps'
+        'uiGmapgoogle-maps',
+        'btford.socket-io'
     ]
 );

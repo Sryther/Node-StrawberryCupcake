@@ -13,7 +13,7 @@
 				<label>Last localisation:</label> {{ currentUser.city }}, {{ currentUser.country }}
 			</div>
 			<h5>Conversation</h5>
-			<a ui-sref="getConversation({username: currentUser.username})">
+			<a ui-sref="getConversation({session: currentUser.session, username: currentUser.username})">
 				See full conversation
 			</a>
 			<h5>Contact</h5>

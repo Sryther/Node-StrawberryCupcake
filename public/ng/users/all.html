@@ -47,7 +47,7 @@
 							<a ui-sref="getUser({username: user.username})">
 								{{ user.fullname }}
 							</a>
-							<a ui-sref="getConversation({username: user.username})" class="pull-right btn-link">
+							<a ui-sref="getConversation({session: user.session, username: user.username})" class="pull-right btn-link">
 								<i class="fa fa-comment fa-fw"></i>
 							</a>
 						</td>

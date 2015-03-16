@@ -4,7 +4,8 @@ var app = angular.module('StrawberryCupcake',
         'ui.bootstrap',
         'ngCookies',
         'ngResource',
-        'uiGmapgoogle-maps'
+        'uiGmapgoogle-maps',
+        'btford.socket-io'
     ]
 );
 ;app.config(function(uiGmapGoogleMapApiProvider) {
@@ -14,20 +15,45 @@ var app = angular.module('StrawberryCupcake',
         libraries: 'weather,geometry,visualization'
     });
 })
-;app.controller('ConversationsController', ['$scope', '$rootScope', '$stateParams', 'ResourceService', function ($scope, $rootScope, $stateParams, ResourceService) {
+;app.controller('ConversationsController', ['$scope', '$rootScope', '$stateParams', 'Socket', 'ResourceService', function ($scope, $rootScope, $stateParams, Socket, ResourceService) {
     var Conversation = ResourceService.Conversation;
     $scope.conversations = [];
     $scope.currentConversation = {};
-    $scope.username = "";
+    $scope.session = "";
+    $scope.yourMessage = "";
 
-    if ($stateParams.username) {
-        $scope.username = $stateParams.username;
+    $scope.socket = {};
+
+    if ($stateParams.session) {
+        $scope.session = $stateParams.session;
+    }
+
+    // Pagination
+    $scope.numPerPage = 20;
+    $scope.filteredConversations = [];
+    $scope.currentPage = 1;
+
+    $scope.selectAll = {
+        isSelected: false
+    };
+
+    $scope.initSocket = function(token) {
+        $scope.socket = Socket.connect(":8080/chat/" + token);
+
+        $scope.socket.on('message', function (msg) {
+            var message = msg.split('#');
+            $scope.currentConversation.push({
+                message: message[1],
+                datetime: new Date(),
+                sender: message[0]
+            })
+        });
     }
 
     $scope.getAll = function() {
         $rootScope.toggleLoading();
-        $scope.conversation = Conversation.all(null, function(data) {
-            $scope.conversation = data;
+        Conversation.all(null, function(data) {
+            $scope.conversations = data;
             $rootScope.toggleLoading();
         }, function(error) {
             $rootScope.toggleLoading();
@@ -46,6 +72,38 @@ var app = angular.module('StrawberryCupcake',
             $rootScope.setError(error.message);
         });
     }
+
+    $scope.send = function() {
+        $scope.socket.emit('message', "Team#" + $scope.yourMessage);
+        $scope.yourMessage = "";
+    }
+
+    $scope.numPages = function () {
+        return Math.ceil($scope.conversations.length / $scope.numPerPage);
+    };
+
+    $scope.pageChanged = function() {
+        var begin = (($scope.currentPage - 1) * $scope.numPerPage);
+        var end = begin + $scope.numPerPage;
+
+        $scope.filteredConversations = $scope.conversations.slice(begin, end);
+    };
+
+    $scope.$watch('conversations', function() {
+        if ($scope.conversations.length > 0) {
+            $scope.pageChanged();
+        }
+    });
+
+    $scope.$watch('selectAll.isSelected', function() {
+        $scope.all();
+    });
+
+    $scope.all = function() {
+        angular.forEach($scope.conversations, function (v, k) {
+            $scope.conversations[k].isSelected = $scope.selectAll.isSelected;
+        });
+    };
 }]);
 ;app.controller('ErrorsController', ['$scope', '$rootScope', function($scope, $rootScope) {
     $scope.error   = false;
@@ -217,6 +275,15 @@ var app = angular.module('StrawberryCupcake',
         }
     };
 }]);
+;app.factory('Socket', function (socketFactory) {
+	return {
+		connect: function(path) {
+			return socketFactory({
+				ioSocket: io.connect(path)
+			});
+		}
+	}
+});
 ;app.factory('ResourceService', ['$resource', function($resource) {
     var methods = {
         'update': { method:'PUT' },
@@ -258,7 +325,7 @@ var app = angular.module('StrawberryCupcake',
         templateUrl: "/ng/conversations/all.html"
     })
     .state('getConversation', {
-        url: "/conversations/:username",
+        url: "/conversations/:session/:username",
         templateUrl: "/ng/conversations/get.html"
     })
 });

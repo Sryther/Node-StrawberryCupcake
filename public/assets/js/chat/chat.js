@@ -13,10 +13,10 @@ $(document).ready(function() {
 
 	chatboxManager.addBox("box",
 		{
-			dest:"dest",
-			title:"box",
-			first_name:"You",
-			last_name:""
+			dest: "dest",
+			title: "box",
+			first_name: token,
+			last_name: ""
 		}
 	);
 });

@@ -10,7 +10,8 @@
     <script src="/assets/js/chat/jquery.ui.chatbox.js"></script>
     <script src="/assets/js/chat/chatboxManager.js"></script>
     <script>
-        var socket = io(":8080/chat/{{ token }}");
+        var token = "{{ token }}";
+        var socket = io(":8080/chat/" + token);
     </script>
     <script src="/assets/js/chat/chat.js"></script>
 {% endblock %}

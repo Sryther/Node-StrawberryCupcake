@@ -3,7 +3,9 @@
     "main": "spoutine.js",
     "plugin": {
         "consumes": [
-            "db"
+            "db",
+            "users",
+            "tracker"
         ],
         "provides": [
             "spoutine"

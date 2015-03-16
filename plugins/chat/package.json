@@ -3,7 +3,7 @@
     "main": "chat.js",
     "plugin": {
         "consumes": [
-            "logger"
+            "conversations"
         ],
         "provides": [
             "chat"

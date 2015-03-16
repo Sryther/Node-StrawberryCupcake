@@ -7,8 +7,8 @@ module.exports = function(options, imports, register) {
         "country" : String,
         "city": String,
         "geo": String,
-        "last_seen" : String,
-        "session" : Number
+        "last_seen" : Date,
+        "session" : String
     });
 
     var User = mongoose.model('User', userSchema);
@@ -25,7 +25,17 @@ module.exports = function(options, imports, register) {
                 if (err) return console.error(err);
                 res.json(user)
             });
-        }
+        },
+        getByToken: function(token) {
+            User.findOne({ session: token }, function (err, user) {
+                if (err) {
+                    console.error(err)
+                    return false;
+                }
+                return user;
+            });
+        },
+        model: User
     };
 
     register(null, {
