@@ -5,7 +5,7 @@
 		</div>
 			<div class="row conversation">
 				<div ng-repeat="(key, message) in currentConversation">
-					<div ng-class="{'bubble-left' : message.sender == session, 'bubble-right' : message.sender != session}">
+					<div ng-class="{'bubble-left' : message.sender != 'Team', 'bubble-right' : message.sender == 'Team'}">
 						{{ message.message }}
 						<div class="bubble-footer">
 							{{ message.datetime }}
