@@ -15,8 +15,8 @@ $(document).ready(function() {
 		{
 			dest: "dest",
 			title: "box",
-			first_name: token,
-			last_name: ""
+			first_name: "Guest",
+			last_name: "_" + token
 		}
 	);
 });

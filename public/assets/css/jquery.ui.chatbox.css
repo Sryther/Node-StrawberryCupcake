@@ -3,19 +3,22 @@
     position: fixed;
     bottom:0;
     padding: 2px;
-    background:  #CCCCCC;
+    background:  #37BC9B;
+    margin-right: 20px;
 }
 
 .ui-chatbox-titlebar{
-	padding:3px;
-    height:20px;
+	padding:5px;
+    height:30px;
     cursor:pointer;
+    color: #191970;
 }
 
 .ui-chatbox-content {
     padding: 0px;
     margin: 0px;
     border: 0px;
+    display: none;
 }
 
 .ui-chatbox-log {
@@ -27,16 +30,18 @@
 }
 
 .ui-chatbox-input {
+    max-width: 250px!important;
     padding: 3px;
-    border-top: 1px solid aqua;
+    border-top: 0px;
     overflow: hidden;
+    background-color: #37BC9B;
+    border : 1px;
 }
 
 .ui-chatbox-input-box {
     margin: 5px;
-    border: 2px solid aqua;/* #6699FF */
+    border: 0px solid #37BC9B;
     padding: 2px;
-    height: 50px;
 }
 
 .ui-chatbox-icon {
@@ -44,7 +49,8 @@
 }
 
 .ui-chatbox-input-focus {
-    border-color: #6699FF;
+    border-color: #37BC9B;
+    margin-right: 10px;
 }
 
 .ui-chatbox-msg {
@@ -57,4 +63,16 @@
     white-space: -pre-wrap;     /* Opera <7 */
     white-space: -o-pre-wrap;   /* Opera 7 */
     word-wrap: break-word;      /* IE */
+}
+
+.ui-widget {
+    border : 0px;
+}
+
+.ui-widget #box {
+    border : 0px;
+}
+
+.ui-widget-content {
+    border : 0px;
 }

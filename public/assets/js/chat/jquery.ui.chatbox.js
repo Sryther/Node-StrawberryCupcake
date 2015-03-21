@@ -19,7 +19,7 @@
             id: null, //id for the DOM element
             title: null, // title of the chatbox
             user: null, // can be anything associated with this chatbox
-            hidden: false,
+            hidden: true, // show or hide the chatbox
             offset: 0, // relative to right edge of the browser window
             width: 300, // width of the chatbox
             messageSent: function(id, user, msg) {
@@ -125,24 +125,6 @@
             uiChatboxTitle = (self.uiChatboxTitle = $('<span></span>'))
                 .html(title)
                 .appendTo(uiChatboxTitlebar),
-            uiChatboxTitlebarClose = (self.uiChatboxTitlebarClose = $('<a href="#"></a>'))
-                .addClass('ui-corner-all ' +
-                          'ui-chatbox-icon '
-                         )
-                .attr('role', 'button')
-                .hover(function() { uiChatboxTitlebarClose.addClass('ui-state-hover'); },
-                       function() { uiChatboxTitlebarClose.removeClass('ui-state-hover'); })
-                .click(function(event) {
-                    uiChatbox.hide();
-                    self.options.boxClosed(self.options.id);
-                    return false;
-                })
-                .appendTo(uiChatboxTitlebar),
-            uiChatboxTitlebarCloseText = $('<span></span>')
-                .addClass('ui-icon ' +
-                          'ui-icon-closethick')
-                .text('close')
-                .appendTo(uiChatboxTitlebarClose),
             uiChatboxTitlebarMinimize = (self.uiChatboxTitlebarMinimize = $('<a href="#"></a>'))
                 .addClass('ui-corner-all ' +
                           'ui-chatbox-icon'
@@ -246,7 +228,7 @@
             this.uiChatboxLog.width(width + "px");
             this.uiChatboxInput.css("maxWidth", width + "px");
             // padding:2, boarder:2, margin:5
-            this.uiChatboxInputBox.css("width", (width - 18) + "px");
+            this.uiChatboxInputBox.css("width", (width - 5) + "px");
         },
         _position: function(offset) {
             this.uiChatbox.css("right", offset);

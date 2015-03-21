@@ -80,7 +80,7 @@ var chatboxManager = function() {
       el.setAttribute('id', id);
       $(el).chatbox({id : id,
          user : user,
-         title : user.first_name + " " + user.last_name,
+         title : user.first_name + user.last_name,
          hidden : false,
          width : config.width,
          offset : getNextOffset(),
