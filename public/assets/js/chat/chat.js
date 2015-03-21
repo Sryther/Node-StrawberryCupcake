@@ -21,10 +21,6 @@ $(document).ready(function() {
 	);
 });
 
-socket.on('welcome', function(msg) {
-	var message = msg.split('#');
-	addMessage(message[0], message[1]);
-});
 socket.on('message', function(msg) {
 	var message = msg.split('#');
 	addMessage(message[0], message[1]);
