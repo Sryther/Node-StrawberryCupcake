@@ -37,10 +37,16 @@ module.exports = function(options, imports, register) {
             });
         },
         update: function(user) {
-            User.update({session: user.session, client: user.clientname}, user, { upsert: true }, function(err, nbAffected) {
-                if (err) return console.error(err);
-                if (nbAffected > 0) return true;
-                return false;
+            User.findOne({session: user.session, client: user.client}, function(err, u) {
+                if(!err) {
+                    if(u == null) {
+                        u = new User(user);
+                    }
+                    u.save(function(err) {
+                        if (err) return console.error(err);
+                        return true;
+                    });
+                }
             });
         },
         model: User

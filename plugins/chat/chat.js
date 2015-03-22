@@ -42,7 +42,7 @@ module.exports = function(options, imports, register) {
                             conversations.save(conv);
 
                             if(arr[0] != "Team") {
-                                var geo = tracker.getLocalisation(req.connection.remoteAddress);
+                                var geo = tracker.getLocalisation(req.connection._peername.address);
                         		var user = {
                         			fullname : "n/a",
                         			username : (id + "").substring(0, 6),
