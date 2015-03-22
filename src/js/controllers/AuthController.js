@@ -15,6 +15,9 @@ app.controller('AuthController', ['$scope', '$rootScope', '$cookies', '$q', '$re
             /* The token is saved only for this session in the web browser */
             $window.sessionStorage.token = token;
             $rootScope.addAlert('success', 'Welcome!');
+            Client.me(null, function(client) {
+                $rootScope.client = client;
+            });
             $location.path('/');
         }, function (error) {
             $rootScope.addAlert('danger', 'Wrong combination clientname/password.');

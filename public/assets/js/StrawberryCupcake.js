@@ -37,6 +37,9 @@ app.config(function(uiGmapGoogleMapApiProvider) {
             /* The token is saved only for this session in the web browser */
             $window.sessionStorage.token = token;
             $rootScope.addAlert('success', 'Welcome!');
+            Client.me(null, function(client) {
+                $rootScope.client = client;
+            });
             $location.path('/');
         }, function (error) {
             $rootScope.addAlert('danger', 'Wrong combination clientname/password.');
@@ -193,6 +196,18 @@ app.config(function(uiGmapGoogleMapApiProvider) {
     $scope.closeAlert = function(index) {
         $scope.alerts.splice(index, 1);
     };
+}]);
+;app.controller('RootController', ['$scope', '$rootScope', '$window', 'ResourceService', function($scope, $rootScope, $window, ResourceService) {
+	$rootScope.client = {};
+	var Client = ResourceService.Client;
+
+	$scope.init = function() {
+		if ($window.sessionStorage.token !== undefined) {
+			Client.me(null, function(client) {
+				$rootScope.client = client;
+			});
+		}
+	}
 }]);
 ;app.controller('TableController', ['$scope', function($scope) {
     $scope.orderByField = 'firstName';
