@@ -16,7 +16,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         data: {
             permissions: {
                 only: ['anonymous'],
-                redirectTo: '/'
+                redirectTo: 'home'
             }
         }
     })
@@ -26,7 +26,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         data: {
             permissions: {
                 only: ['anonymous'],
-                redirectTo: '/'
+                redirectTo: 'home'
             }
         }
     })
@@ -37,7 +37,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         templateUrl: "/ng/dashboard/home.html",
         data: {
             permissions: {
-                only: ['client', 'admin'],
+                only: ['client'],
                 redirectTo: 'login'
             }
         }
@@ -47,7 +47,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         templateUrl: "/ng/dashboard/home.html",
         data: {
             permissions: {
-                only: ['client', 'admin'],
+                only: ['client'],
                 redirectTo: 'login'
             }
         }

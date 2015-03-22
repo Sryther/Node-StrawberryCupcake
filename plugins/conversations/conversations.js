@@ -17,22 +17,49 @@ module.exports = function(options, imports, register) {
         all: function(req, res) {
 			Conversation.aggregate(
                 [
-                    { "$sort": { "datetime": -1 } },
-                    { "$group": {
-                        "_id": "session",
-                        "session": { "$first": "$session" },
-                        "sender": { "$first": "$sender" },
-                        "client": { "$first": "$client" },
-                        "message": { "$first": "$message" },
-                        "end": { "$first": "$end" },
-                        "datetime": { "$first": "$datetime" },
-                        "username_client": { "$first": "$username_client" }
-                    }}
-                ]
-            ).exec(function (err, conversations) {
-                if (err) return console.error(err);
-                res.json(conversations);
-            });
+                    {
+                        "$match": {
+                            "client": req.user.clientname
+                        }
+                    },
+                    {
+                        "$sort": {
+                            "datetime": -1
+                        }
+                    },
+                    {
+                        "$group": {
+                            "_id": { "session" : "$session" },
+                            "session": {
+                                "$first": "$session"
+                            },
+                            "sender": {
+                                "$first": "$sender"
+                            },
+                            "client": {
+                                "$first": "$client"
+                            },
+                            "message": {
+                                "$first": "$message"
+                            },
+                            "end": {
+                                "$first": "$end"
+                            },
+                            "datetime": {
+                                "$first": "$datetime"
+                            },
+                            "username_client": {
+                                "$first": "$username_client"
+                            }
+                        }
+                    }
+                ],
+                function (err, conversations) {
+                    if (err) return console.error(err);
+                    console.log(conversations)
+                    res.json(conversations);
+                }
+            );
         },
         get: function(req, res) {
 			Conversation.find({ session: req.params.session, client: req.user.clientname }, null, {sort: {datetime: 1}}, function (err, conversation) {
