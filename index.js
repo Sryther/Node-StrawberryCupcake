@@ -17,6 +17,9 @@ var config = [
         packagePath: "./plugins/users"
     },
     {
+        packagePath: "./plugins/clients"
+    },
+    {
         packagePath: "./plugins/conversations"
     },
     {

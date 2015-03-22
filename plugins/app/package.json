@@ -5,7 +5,9 @@
         "consumes": [
             "web",
             "users",
-            "conversations"
+            "conversations",
+            "clients",
+            "chat"
         ],
         "provides": [
             "app"

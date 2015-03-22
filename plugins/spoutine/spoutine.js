@@ -3,8 +3,8 @@ module.exports = function(options, imports, register) {
 	var users = imports.users;
 	var tracker = imports.tracker;
 
-	var check = function(token) {
-		var user = tracker.getUser(token);
+	var check = function(token, client) {
+		var user = tracker.getUser(token, client);
 		if (user) return false;
 		return true;
 	}
@@ -18,38 +18,13 @@ module.exports = function(options, imports, register) {
 		check: check,
 		// Return a random number between 1 and 42424242424242
 		random: random,
-		create: function(ip, callback) {
-			do {
-				var token = random();
-			} while(check(token) == false);
-
-			// Track user
-			var location = tracker.getLocalisation(ip);
-
-			if (location == null) {
-				location = {
-					city: "unknown",
-					country: "unknown",
-					ll: [
-						"0",
-						"0"
-					]
-				}
+		create: function(token, client, callback) {
+            if (token === undefined) {
+				do {
+					token = random();
+				} while(check(token, client) == false);
 			}
-
-			var newU = new users.model({
-				fullname : "n/a",
-				username : (token + "").substring(0, 6),
-				country: location.country,
-				city: location.city,
-				geo: location.ll[0] + ',' + location.ll[1],
-				last_seen : Date.now(),
-				session: token
-			});
-
-			newU.save(function(err, newT) {
-				callback(err, newU.session);
-			});
+			callback(token);
 		}
 	}
     register(null, {

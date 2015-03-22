@@ -5,16 +5,28 @@ module.exports = function(options, imports, register) {
 
 	var locate = function(ip) {
 		var geo = geoip.lookup(ip);
+
+		if (geo == null) {
+			geo = {
+				city: "unknown",
+				country: "unknown",
+				ll: [
+					"0",
+					"0"
+				]
+			}
+		}
+
 		return geo;
 	}
 
-	var user = function(token) {
-		return users.getByToken(token);
+	var user = function(token, client) {
+		return users.getByToken(token, client);
 	}
 
     var tracker = {
 		getLocalisation: locate,
-		getUser: user
+		getUser: user,
 	}
 
     register(null, {

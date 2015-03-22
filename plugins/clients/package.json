@@ -1,0 +1,12 @@
+{
+    "name": "clients",
+    "main": "clients.js",
+    "plugin": {
+        "consumes": [
+            "db"
+        ],
+        "provides": [
+            "clients"
+        ]
+    }
+}

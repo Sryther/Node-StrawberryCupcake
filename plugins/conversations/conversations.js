@@ -7,7 +7,8 @@ module.exports = function(options, imports, register) {
 		"message": String,
         "datetime" : Date,
 		"end": Boolean,
-        "session": String
+        "session": String,
+        "client": String
     });
 
     var Conversation = mongoose.model('Conversation', conversationSchema);
@@ -21,6 +22,7 @@ module.exports = function(options, imports, register) {
                         "_id": "session",
                         "session": { "$first": "$session" },
                         "sender": { "$first": "$sender" },
+                        "client": { "$first": "$client" },
                         "message": { "$first": "$message" },
                         "end": { "$first": "$end" },
                         "datetime": { "$first": "$datetime" },
@@ -33,7 +35,7 @@ module.exports = function(options, imports, register) {
             });
         },
         get: function(req, res) {
-			Conversation.find({ session: req.params.session }, null, {sort: {datetime: 1}}, function (err, conversation) {
+			Conversation.find({ session: req.params.session, client: req.user.clientname }, null, {sort: {datetime: 1}}, function (err, conversation) {
                 if (err) return console.error(err);
                 res.json(conversation);
             });

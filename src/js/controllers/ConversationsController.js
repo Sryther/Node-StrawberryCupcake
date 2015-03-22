@@ -1,5 +1,6 @@
 app.controller('ConversationsController', ['$scope', '$rootScope', '$stateParams', 'Socket', 'ResourceService', function ($scope, $rootScope, $stateParams, Socket, ResourceService) {
     var Conversation = ResourceService.Conversation;
+    var Client = ResourceService.Client;
     $scope.conversations = [];
     $scope.currentConversation = {};
     $scope.session = "";
@@ -21,15 +22,19 @@ app.controller('ConversationsController', ['$scope', '$rootScope', '$stateParams
     };
 
     $scope.initSocket = function(token) {
-        $scope.socket = Socket.connect(":8080/chat/" + token);
+        Client.me(null, function(client) {
+            $scope.socket = Socket.connect(":1338/chat/" + client.clientname + "/" + token);
 
-        $scope.socket.on('message', function (msg) {
-            var message = msg.split('#');
-            $scope.currentConversation.push({
-                message: message[1],
-                datetime: new Date(),
-                sender: message[0]
-            })
+            $scope.socket.on('message', function (msg) {
+                var message = msg.split('#');
+                $scope.currentConversation.push({
+                    message: message[1],
+                    datetime: new Date(),
+                    sender: message[0]
+                })
+            });
+        }, function(err) {
+            $rootScope.addAlert('danger', 'An error occured.');
         });
     }
 
@@ -40,7 +45,7 @@ app.controller('ConversationsController', ['$scope', '$rootScope', '$stateParams
             $rootScope.toggleLoading();
         }, function(error) {
             $rootScope.toggleLoading();
-            $rootScope.setError(error.message);
+            $rootScope.addAlert('danger', error.message);
         });
     }
 
@@ -52,7 +57,7 @@ app.controller('ConversationsController', ['$scope', '$rootScope', '$stateParams
                 $scope.currentConversation[k].datetime = date.toDateString() + ' ' + date.toLocaleTimeString();
             });
         }, function(error) {
-            $rootScope.setError(error.message);
+            $rootScope.addAlert('danger', error.message);
         });
     }
 

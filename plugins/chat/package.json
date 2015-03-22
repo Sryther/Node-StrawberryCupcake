@@ -3,7 +3,10 @@
     "main": "chat.js",
     "plugin": {
         "consumes": [
-            "conversations"
+            "conversations",
+            "users",
+            "tracker",
+            "spoutine"
         ],
         "provides": [
             "chat"

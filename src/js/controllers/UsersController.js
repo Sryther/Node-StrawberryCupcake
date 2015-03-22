@@ -26,7 +26,7 @@ app.controller('UsersController', ['$scope', '$rootScope', '$stateParams', 'Reso
             $rootScope.toggleLoading();
         }, function(error) {
             $rootScope.toggleLoading();
-            $rootScope.setError(error.message);
+            $rootScope.addAlert('danger', error.message);
         });
     }
 
@@ -43,7 +43,7 @@ app.controller('UsersController', ['$scope', '$rootScope', '$stateParams', 'Reso
                  zoom: 10
             };
         }, function(error) {
-            $rootScope.setError(error.message);
+            $rootScope.addAlert('danger', error.message);
         });
     }
 

@@ -1,0 +1,29 @@
+<div ng-controller="AuthController" class="container">
+	<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+		<h1>Sign up</h1>
+		<form class="form" ng-submit="register()">
+		    <label for="email">E-mail* :</label>
+		    <input type="email" class="form-control" name="email" ng-model="credentials.email" required>
+			<br>
+		    <label for="clientName">Clientname* :</label>
+		    <input type="text" class="form-control" name="clientname" ng-model="credentials.clientname" required>
+			<br>
+		    <label for="fullName">Full name* :</label>
+		    <input type="text" class="form-control" name="fullname" ng-model="credentials.fullname" required>
+			<br>
+		    <label for="password">Password* :</label>
+		    <input type="password" class="form-control" name="password" ng-model="credentials.password" required>
+			<br>
+		    <label for="passwordConfirmation">Password (confirmation)* :</label>
+		    <input type="password" class="form-control" name="password_confirmation" ng-model="credentials.password_confirmation" required>
+		    <p>
+		        <small>
+		            All fields with <code>*</code> are required
+		        </small>
+		    </p>
+		    <button class="btn btn-primary">Sign up</button>
+
+		</form>
+	</div>
+</div>

@@ -1,5 +1,6 @@
 {% extends 'layouts/master.html' %}
 {% block script %}
+    <link rel="stylesheet" href="/assets/css/strawberry-cupcake.css" />
     <link rel="stylesheet" href="/assets/css/jquery-ui-1.9.2.custom.css" />
     <link type="text/css" href="/assets/css/jquery.ui.chatbox.css" rel="stylesheet"/>
 
@@ -10,19 +11,108 @@
     <script src="/assets/js/chat/jquery.ui.chatbox.js"></script>
     <script src="/assets/js/chat/chatboxManager.js"></script>
     <script>
-        var token = "{{ token }}";
-        var socket = io(":1338/chat/" + token);
+        var client = "Strawberry Cupcake";
     </script>
     <script src="/assets/js/chat/chat.js"></script>
 {% endblock %}
 {% block body %}
-<div class="container">
-	<h1>Welcome home !</h1>
-    <a href="/dashboard/" target="_blank" class="btn btn-primary">
-        <i class="fa fa-cog fa-fw"></i> Go to dashboard
-    </a>
-    <br />
-    <br />
-    Debug: <code>{{ token }}</code>
+<div class="screen-fill">
+    <div class="row" style="margin-right:0px;">
+        <div class="col-xs-12 col-sm-12 col-md-offset-1 col-lg-offset-1 col-md-4 col-lg-4">
+            <div class="window editor fading">
+                <div class="header">
+                    <span class="bullet bullet-red"></span><span class="bullet bullet-yellow"></span><span class="bullet bullet-green"></span><span class="title">~/website/index.html</span>
+                </div>
+                <div class="body">
+                    <ol class="code">
+                        <li><span class="code">// Once you received the token from our servers</span></li>
+                        <li><span class="code"><span class="v">var</span> token = <span class="io">tokenReceived</span>;</span></li>
+                        <li><span class="code"><span class="v">var</span> client = <span class="io">yourClientName</span>;</span></li>
+                        <li><span class="code"><span class="v">var</span> socket = <span class="io">io(":1338/chat/" + client + "/" + token)</span>;</span></li>
+                        <li><span class="code"><span class="v">var</span> broadcastMessageCallback = <span class="fn">function</span>(from, msg) {
+                        <li><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;<span class="io">socket.emit</span>('message', from + '#' + msg);</span></li>
+                        <li><span class="code">}</span></li>
+                        <li><span class="code"><span class="io">socket.on</span>('message', <span class="fn">function</span>(msg) {</li>
+                        <li><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;<span class="v">var</span> message = msg.split('#');</span></li>
+                        <li><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;// Handle your message here</span></li>
+                        <li><span class="code">});</span></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-offset-2 col-lg-offset-2 col-md-4 col-lg-4">
+            <div class="window editor fading">
+                <div class="header">
+                    <span class="bullet bullet-red"></span><span class="bullet bullet-yellow"></span><span class="bullet bullet-green"></span><span class="title">~/website/chat.js</span>
+                </div>
+                <div class="body">
+                    <div class="center">
+                        <h2>That's it!</h2>
+                        <h5>You're ready to use Strawberry Cupcake</h5>
+                        <p>
+                            You can download the script ready to use right here :
+                        </p>
+                        <p>
+                            <a href="/assets/js/chat/chat.js" class="btn btn-info">
+                                Download the script ready to use
+                            </a>
+                        </p>
+                        <p>
+                            If you're facing with any issue, you can use our live chat in the downer right corner! We'll enjoy answering :)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span class="center fading arrow">
+        <i class="fa fa-angle-down fa-4x"></i>
+    </span>
 </div>
+<div class="container entry-content">
+    <h2>Why Strawberry Cupcake is so delicious ?</h2>
+    <center>
+        <img style="width: 100%;" src="/assets/img/schema.png" />
+        <h3>All in one package</h3>
+    </center>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="margin-bottom: 10%;">
+        <center>
+            <h4>Realtime analytics</h4>
+            <i class="fa fa-bar-chart fa-5x"></i>
+            <h5>
+                Get statistics on your new users or customers.
+            </h5>
+        </center>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="margin-bottom: 10%;">
+        <center>
+            <h4>Feedback</h4>
+            <i class="fa fa-thumbs-o-up fa-5x"></i>
+            <h5>
+                Get quality product feedbacks from the right customers.
+            </h5>
+        </center>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="margin-bottom: 10%;">
+        <center>
+            <h4>Engage</h4>
+            <i class="fa fa-comments-o fa-5x"></i>
+            <h5>
+                Engage the conversation to guide your new users to become active customers.
+            </h5>
+        </center>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="margin-bottom: 10%;">
+        <center>
+            <h4>Support</h4>
+            <i class="fa fa-question fa-5x"></i>
+            <h5>
+                Streamline support for your team and your customers.
+            </h5>
+        </center>
+    </div>
+</div>
+<script>
+    $(".screen-fill").height($(window).height() - $(".navbar").height() * 2);
+</script>
 {% endblock %}

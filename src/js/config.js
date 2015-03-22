@@ -1,3 +1,7 @@
+app.config(['$httpProvider', function ($httpProvider) {
+    $httpProvider.interceptors.push('AuthInterceptor');
+}]);
+
 app.config(function(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
         key: 'AIzaSyBMA4UIe4S5OjrZlNQx6DDME-xFxg0r-2w',

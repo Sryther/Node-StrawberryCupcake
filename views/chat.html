@@ -6,7 +6,7 @@
 	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 	<script>
-	var socket = io(':8080/chat/{{ id }}');
+	var socket = io(':1338/chat/{{ id }}');
 	function send() {
 		$('form').submit(function(){
 			socket.emit('message', $('#m').val());
