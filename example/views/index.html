@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Strawberry Cupcake Test</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/bootflat/css/custom-bootflat.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="/assets/css/strawberry-cupcake.css" />
+        <link rel="stylesheet" href="/assets/css/jquery-ui-1.9.2.custom.css" />
+        <link type="text/css" href="/assets/css/jquery.ui.chatbox.css" rel="stylesheet"/>
+
+        <script src="//cdn.socket.io/socket.io-1.2.0.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.2.js"></script>
+        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <script src="//code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
+        <script src="/assets/js/chat/jquery.ui.chatbox.js"></script>
+        <script src="/assets/js/chat/chatboxManager.js"></script>
+        <script>
+            var client = "Sryther"; // <-- Client name !!! TO CHANGE !!!
+
+            $(document).ready(function() {
+            	$.ajax({
+            		type: "POST",
+            		url: "http://amos.krondor.fr:1337/chat/hello",
+            		data: {
+            			client: client
+            		},
+            		success: function(data) {
+            			// Emit message function
+            			var broadcastMessageCallback = function(from, msg) {
+            				// The format message is Name#MyMessage
+            				// ex: "Guest#Hello I'm a guest :)"
+            				socket.emit('message', from + '#' + msg);
+            			}
+
+            			// Add the message to the chatbox
+            			var addMessage = function(from, msg) {
+            				$("#box").chatbox("option", "boxManager").addMsg(from, msg);
+            			}
+
+            			// Sets the token and the clientname
+            			var token = data.token;
+            			var socket = io("http://amos.krondor.fr:1338/chat/" + client + "/" + token);
+
+            			// Chatbox configuration
+            			chatboxManager.init({
+            				messageSent : broadcastMessageCallback
+            			});
+
+            			chatboxManager.addBox("box", {
+            				dest: "dest",
+            				title: "box",
+            				first_name: "Guest", // DO NOT USE "Team" AS NAME HERE!!
+            				last_name: ""
+            			});
+
+            			// Handle message reception
+            			socket.on('message', function(msg) {
+            				var message = msg.split('#');
+            				addMessage(message[0], message[1]);
+            			});
+            		}
+            	});
+            });
+        </script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default" style="border-radius: 0; margin-bottom: 0;">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Sryther</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav pull-right">
+                        <li>
+                            <a target="_blank" href="http://amos.krondor.fr:1337/dashboard/">
+                                Go to your dashboard <i class="fa fa-angle-right fa-fw"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div><!-- /.container-fluid -->
+        </nav>
+        <div class="container">
+            <h1>Strawberry Cupcake Test</h1>
+        </div>
+    </body>
+</html>

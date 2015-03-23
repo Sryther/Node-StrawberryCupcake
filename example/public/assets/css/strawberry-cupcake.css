@@ -1,0 +1,153 @@
+.window {
+  background-color: #fff;
+  border: 1px solid rgb(195, 195, 195);
+  border-radius: 4px;
+  -webkit-box-shadow: 0px 2px 3px 0px rgba(50, 50, 50, 0.11);
+  -moz-box-shadow: 0px 2px 3px 0px rgba(50, 50, 50, 0.11);
+  box-shadow: 0px 2px 3px 0px rgba(50, 50, 50, 0.11);
+  text-align: left;
+  vertical-align: top;
+  animation: zoom 500ms;
+  -webkit-animation: zoom 500ms;
+}
+
+.window {
+  display: inline-block;
+}
+
+.window .header {
+  padding: 0 9px;
+  line-height: 30px;
+  vertical-align: top;
+  padding: 2px 9px 0;
+}
+
+.window .header .title {
+  font: 11px "Myriad Pro", "Arial";
+}
+
+.editor .title {
+  text-align: center;
+  display: inline-block;
+  color: #766F79;
+  vertical-align: middle;
+}
+
+.editor .body {
+  padding: 18px 10px;
+}
+
+.editor .code {
+  font: 11px Monaco, Courier New;
+  color: #ccc;
+}
+
+.editor .code .code {
+  color: #777;
+}
+
+.editor .code li {
+  padding: 3px 0;
+}
+
+.editor .code .fn {
+  color: #4A90E2;
+}
+
+.editor .code .v {
+  color: #7ED321;
+}
+
+.editor .code .io {
+  color: #000;
+}
+
+.window .bullet {
+  height: 11px;
+  width: 11px;
+  display: inline-block;
+  background: #ccc;
+  border-radius: 100%;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.window .bullet-red {
+  background: #DF7065;
+}
+
+.window .bullet-yellow {
+  background: #E6BB46;
+}
+
+.window .bullet-green {
+  background: #5BCC8B;
+}
+
+@-webkit-keyframes zoom {
+  0%   { opacity: 0; -webkit-transform: scale(1.15); }
+  100% { opacity: 1; -webkit-transform: scale(1); }
+}
+
+@-webkit-keyframes drop {
+  0%   { opacity: 0; -webkit-transform: translateY(-20px); }
+  100% { opacity: 1; -webkit-transform: translateY(0px); }
+}
+
+@keyframes zoom {
+  0%   { opacity: 0; transform: scale(1.15); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes drop {
+  0%   { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0px); }
+}
+
+.center {
+    text-align: center;
+}
+
+.screen-fill {
+  text-align: center;
+  height: inherit;
+  vertical-align: top;
+  padding-top: 60px;
+}
+
+@media screen and (min-height: 600px) {
+  .arrow {
+    color: #fff;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -36px;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+    .screen-fill {
+      height: auto !important;
+      padding-top: 0;
+    }
+
+    .arrow {
+      display: none;
+    }
+}
+
+.screen-fill {
+    background-image: url(/assets/img/bg-pres.jpg);
+    background-size: 100%;
+}
+
+.entry-content:before,
+.entry-content:after {
+  content: '';
+  display: table;
+}
+
+.entry-content:after {
+    clear: both;
+}

@@ -1,6 +1,6 @@
 module.exports = function(options, imports, register) {
     var logger = {
-        save: function(message) {
+        log: function(message) {
             // TODO
         }
     };

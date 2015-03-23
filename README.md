@@ -43,3 +43,13 @@ In case you do not have grunt-cli
 Change the credentials in :
 
 	/plugins/db/db.js
+
+### Example
+
+You can try the solution with the example in the example folder !
+
+You must connect on [the lead site](http://amos.krondor.fr:1337/) with this credentials :
+
+- Clientname : "Sryther" or "Strawberry Cupcake"
+
+- Password : "test"
