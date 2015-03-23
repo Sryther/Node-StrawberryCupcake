@@ -6,7 +6,7 @@
 $(document).ready(function() {
 	$.ajax({
 		type: "POST",
-		url: "http://127.0.0.1:8000/chat/hello",
+		url: "http://127.0.0.1:8000/chat/hello",  // CHANGE ADDRESS TO OUR SITE
 		data: {
 			client: client
 		},
@@ -25,7 +25,7 @@ $(document).ready(function() {
 
 			// Sets the token and the clientname
 			var token = data.token;
-			var socket = io(":1338/chat/" + client + "/" + token);
+			var socket = io("http://127.0.0.1:1338/chat/" + client + "/" + token); // CHANGE ADDRESS TO OUR SITE
 
 			// Chatbox configuration
 			chatboxManager.init({
@@ -36,7 +36,7 @@ $(document).ready(function() {
 				dest: "dest",
 				title: "box",
 				first_name: "Guest", // DO NOT USE "Team" AS NAME HERE!!
-				last_name: "_" + token // Use the token here is not a mandatory
+				last_name: "" // Use the token if you want, but it is not a mandatory
 			});
 
 			// Handle message reception

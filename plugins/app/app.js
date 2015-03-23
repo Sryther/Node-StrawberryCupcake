@@ -16,6 +16,13 @@ module.exports = function(options, imports, register) {
     var conversations = imports.conversations;
     var chat = imports.chat;
 
+    var allowCrossDomain = function(req, res, next) {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+        res.header('Access-Control-Allow-Headers', 'Content-Type');
+        next();
+    }
+
     /// CONFIGURATION ///
     app.use('/api', expressJwt({secret: "SuperSecret"}));
     app.use(express["static"](options.rootFolder + '/public'));
@@ -25,6 +32,7 @@ module.exports = function(options, imports, register) {
     app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
     app.use(methodOverride());
     app.use(cookieParser());
+    app.use(allowCrossDomain);
 
     app.use(function (req, res, next) {
         console.log(req.body);
